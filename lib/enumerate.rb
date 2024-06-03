@@ -4,5 +4,5 @@ require_relative "enumerate/version"
 
 module Enumerate
   class Error < StandardError; end
-  # Your code goes here...
+  
 end
