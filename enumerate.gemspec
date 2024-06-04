@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["Joel AZEMAR"]
   spec.email = ["joel.azemar@gmail.com"]
 
-  spec.summary = "Write a short summary, because RubyGems requires one."
-  spec.description = "Write a longer description or delete this line."
+  spec.summary = "Small gem to define enums in Ruby classes"
+  spec.description = "Small gem to define enums in Ruby classes"
   spec.homepage = "http://mygemserver.com"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.0.0"
@@ -33,11 +33,13 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  
+  spec.add_dependency "activesupport"
   spec.add_dependency "zeitwerk"
-    # Uncomment to register a new dependency of your gem
+
+  # Uncomment to register a new dependency of your gem
   # spec.add_dependency "example-gem", "~> 1.0"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
+  spec.metadata["rubygems_mfa_required"] = "true"
 end

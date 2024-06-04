@@ -13,3 +13,11 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 end
+
+Dir[File.join(File.dirname(__FILE__), "support/configurations/**/*.rb")].each do |file_path|
+  require file_path
+end
+
+Dir[File.join(File.dirname(__FILE__), "support/matchers/**/*.rb")].each do |file_path|
+  require file_path
+end

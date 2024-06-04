@@ -1,4 +1,17 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-performance
+  - rubocop-rake
+  - rubocop-rspec
+  - rubocop-gitlab-security
+  - rubocop-performance
+  - rubocop-thread_safety
+  - rubocop-i18n
+
 AllCops:
+  NewCops: enable
+  SuggestExtensions: true
   TargetRubyVersion: 3.0
 
 Style/StringLiterals:
