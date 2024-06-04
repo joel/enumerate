@@ -2,46 +2,61 @@
 
 module Enumerate
   RSpec.describe Dsl do
-    let(:klass) do
-      Class.new do
-        include Enumerate::Dsl
+    shared_examples "an enum" do
+      describe "._enums" do
+        it "defines class attribute" do
+          expect(klass).to respond_to(:_enums)
+        end
 
-        enums :status, :state
+        it "defines values as hashes" do
+          expect(klass._enums).to eq(status: { value: 1 }, state: { value: 2, metadata: { foo: "bar" } })
+        end
+      end
+
+      describe ".define_enum_methods" do
+        it "defines enum methods" do
+          expect(klass).to respond_to(:status)
+        end
+
+        it "returns enum entry value" do
+          expect(klass.status).to eq(value: 1)
+        end
+
+        it "defines enum getter method for the value" do
+          expect(klass.status_value).to eq(1)
+        end
+
+        it "defines enum getter method for the values" do
+          expect(klass.status_values).to eq([1])
+        end
+
+        it "defines enum getter method for the keys" do
+          expect(klass.status_keys).to eq([:value])
+        end
+
+        it "defines enum predicate method" do
+          expect(klass.status?(1)).to eq(true)
+        end
       end
     end
 
-    describe ".enums" do
-      it "defines enum methods" do
-        expect(klass).to respond_to(:status)
-        expect(klass).to respond_to(:status?)
-        expect(klass).to respond_to(:status!)
-        expect(klass).to respond_to(:status=)
-        expect(klass).to respond_to(:status_values)
-        expect(klass).to respond_to(:status_keys)
+    it_behaves_like "an enum" do
+      let(:klass) do
+        Class.new do
+          include Enumerate::Dsl
 
-        expect(klass).to respond_to(:state)
-        expect(klass).to respond_to(:state?)
-        expect(klass).to respond_to(:state!)
-        expect(klass).to respond_to(:state=)
-        expect(klass).to respond_to(:state_values)
-        expect(klass).to respond_to(:state_keys)
+          enums status: { value: 1 }, state: { value: 2, metadata: { foo: "bar" } }
+        end
+      end
+    end
 
-        expect(klass._enums).to eq(status: {}, state: {})
+    it_behaves_like "an enum" do
+      let(:klass) do
+        Class.new do
+          include Enumerate::Dsl
 
-        klass.enum(:status, active: 1, inactive: 0)
-        klass.enum(:state, active: 1, inactive: 0)
-
-        expect(klass.status).to eq(active: 1, inactive: 0)
-        expect(klass.state).to eq(active: 1, inactive: 0)
-
-        expect(klass.status_values).to eq([1, 0])
-        expect(klass.state_values).to eq([1, 0])
-
-        expect(klass.status_keys).to eq(%i[active inactive])
-        expect(klass.state_keys).to eq(%i[active inactive])
-
-        expect(klass.status?({ active: 1, inactive: 0 })).to be(true)
-        expect(klass.state?({ active: 1, inactive: 0 })).to be(true)
+          enums status: 1, state: { value: 2, metadata: { foo: "bar" } }
+        end
       end
     end
   end
