@@ -12,16 +12,23 @@ module Enumerate
     end
 
     class_methods do
-      def enums(*args)
-        options = args.extract_options!
-        args.each do |name|
+      def enums(values)
+        values.each do |name, options|
           enum(name, options)
         end
       end
 
       def enum(name, options = {})
         name = name.to_sym
-        self._enums = _enums.merge(name => options)
+        case options
+        when Hash
+          raise ArgumentError, _("missing value key in options") unless options.key?(:value)
+
+          self._enums = _enums.merge(name => options) # e.g. enums single: { value: 1 }, married: { value: 2 }, divorced: { value: 3 }
+        else
+          value = options # e.g. enums single: 1, married: 2, divorced: 3
+          self._enums = _enums.merge({ name => { value: } })
+        end
         define_enum_methods(name)
       end
 
@@ -35,7 +42,7 @@ module Enumerate
         end
 
         define_singleton_method(:"#{name}?") do |value|
-          send(name) == value
+          send(:"#{name}_value") == value
         end
 
         define_singleton_method(:"#{name}!") do |value|
@@ -44,6 +51,10 @@ module Enumerate
 
         define_singleton_method(:"#{name}_values") do
           send(name).values
+        end
+
+        define_singleton_method(:"#{name}_value") do
+          send(name).fetch(:value)
         end
 
         define_singleton_method(:"#{name}_keys") do
