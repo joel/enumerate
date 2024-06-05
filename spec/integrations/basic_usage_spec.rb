@@ -7,7 +7,7 @@ RSpec.describe "Enumerate" do
     class RelationshipStatus
       include Enumerate::Dsl
 
-      enums :single, :married, :divorced, :widowed
+      enums single: { value: 1 }, married: { value: 2 }, divorced: { value: 3 }, widowed: { value: 4 }
     end
   end
 

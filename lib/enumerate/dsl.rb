@@ -20,36 +20,17 @@ module Enumerate
 
     class_methods do
       # e.g. enums single: { value: 1 }, married: { value: 2 }, divorced: { value: 3 }, widowed: { value: 4 }
-      # e.g. enums single: 1, married: 2, divorced: 3, widowed: 4
-      # e.g. enums :single, :married, :divorced, :widowed
-      def enums(*entries)
-        case entries
-        in Hash
-          entries.each do |key, value|
-            enum(key, value)
-          end
-        in Array
-          entries.each do |key|
-            enum(key, nil)
-          end
+      def enums(entries)
+        entries.each do |key, value|
+          enum(key, value)
         end
       end
 
       # e.g. enum :single, { value: 1 }
-      # e.g. enum :single, 1
       def enum(name, value_maybe_hash)
-        case value_maybe_hash
-        in Integer
-          self.entries = entries.merge(name => { value: value_maybe_hash })
-        in Hash
-          raise ArgumentError, _("missing value key in options") unless value_maybe_hash.key?(:value)
+        self.entries = entries.merge(name => value_maybe_hash)
 
-          self.entries = entries.merge(name => value_maybe_hash)
-        else
-          self.entries = entries.merge(name => { value: (entries.values.map { |v| v[:value] }.max.to_i + 1) || 1 })
-        end
-
-        # define_helpers_methods(name)
+        define_helpers_methods(name)
       end
 
       def define_helpers_methods(name)
@@ -57,16 +38,8 @@ module Enumerate
           entries[name]
         end
 
-        define_singleton_method(:"#{name}=") do |value|
-          entries[name][:value] = value
-        end
-
-        define_singleton_method(:"#{name}_value") do
-          send(name).fetch(:value)
-        end
-
-        define_singleton_method(:"#{name}_keys") do
-          send(name).keys
+        define_method(name) do
+          self.class.send(name)
         end
 
         define_singleton_method(:"#{name}_translation") do
