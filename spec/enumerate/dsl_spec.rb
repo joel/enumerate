@@ -3,13 +3,14 @@
 module Enumerate
   RSpec.describe Dsl do
     shared_examples "an enum" do
-      describe "._enums" do
+      describe ".entries" do
         it "defines class attribute" do
-          expect(klass).to respond_to(:_enums)
+          expect(klass).to respond_to(:entries)
         end
 
         it "defines values as hashes" do
-          expect(klass._enums).to eq(status: { value: 1 }, state: { value: 2, metadata: { foo: "bar" } })
+          expect(klass.entries).to eq({ state: { metadata: { foo: "bar" }, value: 2 },
+                                        status: { value: 1 } })
         end
       end
 
@@ -26,16 +27,8 @@ module Enumerate
           expect(klass.status_value).to eq(1)
         end
 
-        it "defines enum getter method for the values" do
-          expect(klass.status_values).to eq([1])
-        end
-
         it "defines enum getter method for the keys" do
           expect(klass.status_keys).to eq([:value])
-        end
-
-        it "defines enum predicate method" do
-          expect(klass.status?(1)).to eq(true)
         end
       end
     end

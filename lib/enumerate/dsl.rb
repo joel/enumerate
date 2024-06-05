@@ -7,50 +7,42 @@ module Enumerate
     extend ActiveSupport::Concern
 
     included do
-      class_attribute :_enums
-      self._enums = {}
+      class_attribute :entries, instance_writer: false, instance_reader: false
+      self.entries = {}
     end
 
     class_methods do
-      def enums(values)
-        values.each do |name, options|
-          enum(name, options)
+      # e.g. enums status: { value: 1 }, role: { value: 2 }
+      # e.g. enums status: 1, role: 2
+      def enums(entries)
+        entries.each do |name, value|
+          enum(name, value)
         end
       end
 
-      def enum(name, options = {})
+      # e.g. enum :status, { value: 1 }
+      # e.g. enum :status, 1
+      def enum(name, value_maybe_hash)
         name = name.to_sym
-        case options
+        case value_maybe_hash
         when Hash
-          raise ArgumentError, _("missing value key in options") unless options.key?(:value)
+          raise ArgumentError, _("missing value key in options") unless value_maybe_hash.key?(:value)
 
-          self._enums = _enums.merge(name => options) # e.g. enums single: { value: 1 }, married: { value: 2 }, divorced: { value: 3 }
+          self.entries = entries.merge(name => value_maybe_hash)
         else
-          value = options # e.g. enums single: 1, married: 2, divorced: 3
-          self._enums = _enums.merge({ name => { value: } })
+          self.entries = entries.merge(name => { value: value_maybe_hash })
         end
+
         define_enum_methods(name)
       end
 
       def define_enum_methods(name)
         define_singleton_method(name) do
-          _enums[name]
+          entries[name]
         end
 
         define_singleton_method(:"#{name}=") do |value|
-          _enums[name] = value
-        end
-
-        define_singleton_method(:"#{name}?") do |value|
-          send(:"#{name}_value") == value
-        end
-
-        define_singleton_method(:"#{name}!") do |value|
-          send(:"#{name}=", value)
-        end
-
-        define_singleton_method(:"#{name}_values") do
-          send(name).values
+          entries[name][:value] = value
         end
 
         define_singleton_method(:"#{name}_value") do

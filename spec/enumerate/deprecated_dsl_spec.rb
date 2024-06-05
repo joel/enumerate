@@ -6,8 +6,6 @@ module Enumerate
       Class.new do
         include Enumerate::Dsl
         include Enumerate::DeprecatedDsl
-
-        enums :status, :state
       end
     end
 
@@ -15,7 +13,7 @@ module Enumerate
 
     describe ".enumeration_value" do
       before do
-        expect(klass).to receive(:enum).with(:status, { active: 1, inactive: 0 })
+        expect(enumeratable).to receive(:enum).with(:status, { active: 1, inactive: 0 })
       end
 
       it "emits a deprecation warning" do
