@@ -36,6 +36,14 @@ module Enumerate
         it "returns enum entry value from the instance" do
           expect(enum_object.single).to eq(value: 1)
         end
+
+        it "defines #translation methods" do
+          expect(enum_object).to respond_to(:translation)
+        end
+
+        it "returns translation for a given key" do
+          expect(enum_object.translation(:single)).to eq("A Person Single")
+        end
       end
     end
 

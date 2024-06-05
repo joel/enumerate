@@ -21,3 +21,7 @@ end
 Dir[File.join(File.dirname(__FILE__), "support/matchers/**/*.rb")].each do |file_path|
   require file_path
 end
+
+Dir[File.join(File.dirname(__FILE__), "support/**/*.rb")].each do |file_path|
+  require file_path
+end

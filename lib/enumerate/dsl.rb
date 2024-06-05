@@ -41,25 +41,23 @@ module Enumerate
         define_method(name) do
           self.class.send(name)
         end
-
-        define_singleton_method(:"#{name}_translation") do
-          value.to_s.tr("_", " ").split.map(&:capitalize).join(" ")
-          I18n.t("enumerations.#{name.underscore}.#{value.to_s.underscore}", default: send(:"#{name}_value"))
-          I18n.t(key_for_translation)
-        end
-
-        # en:
-        #   enumerations:
-        #     relationship_status:
-        #       single: Person single
-        define_singleton_method(:"#{name}_translation_key") do
-          [
-            "enumerations",
-            enumeration_class.name.underscore,
-            name
-          ].compact.join(".")
-        end
       end
+    end
+
+    def translation(name)
+      I18n.t(translation_key(name))
+    end
+
+    # en:
+    #   enumerations:
+    #     relationship_status:
+    #       single: Person single
+    def translation_key(name)
+      [
+        "enumerations",
+        attribute_name.to_s.underscore,
+        name
+      ].compact.join(".")
     end
   end
 end
