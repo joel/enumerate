@@ -16,7 +16,7 @@ module Enumerate
       def has_enumeration_for(attribute_name, options = {})
         self.attribute_name = attribute_name
         self.options        = options
-        self.enumerations = ({})
+        self.enumerations   = ({})
 
         store_enumeration_class
       end
@@ -24,7 +24,7 @@ module Enumerate
       private
 
       def store_enumeration_class
-        enumerations[attribute_name] = enumeration_class_name
+        enumerations[attribute_name] = enumeration_class_name.constantize.new(attribute_name, options)
       end
 
       def enumeration_class_name

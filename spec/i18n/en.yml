@@ -1,0 +1,47 @@
+en:
+  activerecord:
+    errors:
+      models:
+        foo:
+          attributes:
+            foobar:
+              inclusion: "is not included in the list"
+              blank: "can't be blank"
+  enumerations:
+    test_enumeration:
+      value_1: Hey, I am 1!
+      value_2: Hey, I am 2!
+      value_3: Hey, I am 3!
+    test_enumeration_without_array:
+      value_one: First Value
+      value_two: Value Two
+    test_enumeration_with_sort_mode_translation:
+      foo: xyz
+      bar: fgh
+      omg: abc
+      zomg: jkl
+    test_enumeration_with_sort_mode:
+      foo: xyz
+      bar: fgh
+      omg: abc
+      zomg: jkl
+    test_enumeration_with_sort_mode_value:
+      foo: xyz
+      bar: fgh
+      omg: abc
+      zomg: jkl
+    test_enumeration_with_sort_mode_name:
+      foo: xyz
+      bar: fgh
+      omg: abc
+      zomg: jkl
+    test_enumeration_with_sort_mode_translation:
+      foo: xyz
+      bar: fgh
+      omg: abc
+      zomg: jkl
+    test_enumeration_with_sort_mode_none:
+      foo: xyz
+      bar: fgh
+      omg: abc
+      zomg: jkl

@@ -3,15 +3,11 @@
 require "spec_helper"
 
 RSpec.describe "Enumerate" do
-  let(:enumeration_klass) do
-    Class.new do
+  let!(:enumeration_klass) do
+    class RelationshipStatus
       include Enumerate::Dsl
 
-      enums :relationship_status
-
-      def self.name
-        "RelationshipStatus"
-      end
+      enums :single, :married, :divorced, :widowed
     end
   end
 
@@ -27,7 +23,15 @@ RSpec.describe "Enumerate" do
     end
   end
 
-  it "stores the enumeration class" do
-    expect(klass_with_enumeration.enumerations).to eq(relationship_status: "RelationshipStatus")
+  it "stores the enumeration object" do
+    expect(klass_with_enumeration.enumerations.size).to eq(1)
+  end
+
+  it "stores the enumeration object with the correct key" do
+    expect(klass_with_enumeration.enumerations).to have_key(:relationship_status)
+  end
+
+  it "stores the enumeration object as an instance of the enumeration class" do
+    expect(klass_with_enumeration.enumerations[:relationship_status]).to be_a(RelationshipStatus)
   end
 end

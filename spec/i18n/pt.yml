@@ -1,0 +1,42 @@
+pt:
+  enumerations:
+    test_enumeration_without_array:
+      value_one: Primeiro Valor
+      value_two: Valor Dois
+    test_enumeration:
+      value_1: Ei, eu sou 1!
+      value_2: Ei, eu sou 2!
+      value_3: Ei, eu sou 3!
+    nested_enum:
+      foo: Blerrgh
+    test_enumeration_with_extended_behaviour:
+      first: First
+      second: Second
+    test_enumeration_with_list:
+      first: First
+      second: Second
+    test_enumeration_with_sort_mode:
+      foo: xyz
+      bar: fgh
+      omg: abc
+      zomg: jkl
+    test_enumeration_with_sort_mode_value:
+      foo: xyz
+      bar: fgh
+      omg: abc
+      zomg: jkl
+    test_enumeration_with_sort_mode_name:
+      foo: xyz
+      bar: fgh
+      omg: abc
+      zomg: jkl
+    test_enumeration_with_sort_mode_translation:
+      foo: xyz
+      bar: fgh
+      omg: abc
+      zomg: jkl
+    test_enumeration_with_sort_mode_none:
+      foo: xyz
+      bar: fgh
+      omg: abc
+      zomg: jkl

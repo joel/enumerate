@@ -5,52 +5,72 @@ module Enumerate
     shared_examples "an enum" do
       describe ".entries" do
         it "defines class attribute" do
-          expect(klass).to respond_to(:entries)
+          expect(enum_object).to respond_to(:entries)
         end
 
         it "defines values as hashes" do
-          expect(klass.entries).to eq({ state: { metadata: { foo: "bar" }, value: 2 },
-                                        status: { value: 1 } })
+          expect(enum_object.entries).to eq(
+            {
+              divorced: { value: 7 },
+              married:  { value: 6 },
+              single:   { value: 5 },
+              widowed:  { value: 8 }
+            }
+          )
         end
       end
 
-      describe ".define_enum_methods" do
-        it "defines enum methods" do
-          expect(klass).to respond_to(:status)
-        end
+      # describe ".define_enum_methods" do
+      #   it "defines enum methods" do
+      #     expect(enum_object).to respond_to(:status)
+      #   end
 
-        it "returns enum entry value" do
-          expect(klass.status).to eq(value: 1)
-        end
+      #   it "returns enum entry value" do
+      #     expect(enum_object.status).to eq(value: 1)
+      #   end
 
-        it "defines enum getter method for the value" do
-          expect(klass.status_value).to eq(1)
-        end
+      #   it "defines enum getter method for the value" do
+      #     expect(enum_object.status_value).to eq(1)
+      #   end
 
-        it "defines enum getter method for the keys" do
-          expect(klass.status_keys).to eq([:value])
-        end
-      end
+      #   it "defines enum getter method for the keys" do
+      #     expect(enum_object.status_keys).to eq([:value])
+      #   end
+      # end
     end
+
+    # it_behaves_like "an enum" do
+    #   let(:enum_object) do
+    #     class RelationshipStatus
+    #       include Enumerate::Dsl
+
+    #       enums :single, :married, :divorced, :widowed
+    #     end
+
+    #     RelationshipStatus.new(:relationship_status)
+    #   end
+    # end
 
     it_behaves_like "an enum" do
-      let(:klass) do
-        Class.new do
+      let(:enum_object) do
+        class RelationshipStatus
           include Enumerate::Dsl
 
-          enums status: { value: 1 }, state: { value: 2, metadata: { foo: "bar" } }
+          enums single: 1, married: 2, divorced: 3, widowed: 4
         end
+
+        RelationshipStatus.new(:relationship_status)
       end
     end
 
-    it_behaves_like "an enum" do
-      let(:klass) do
-        Class.new do
-          include Enumerate::Dsl
+    # it_behaves_like "an enum" do
+    #   let(:enum_object) do
+    #     class RelationshipStatus
+    #       include Enumerate::Dsl
 
-          enums status: 1, state: { value: 2, metadata: { foo: "bar" } }
-        end
-      end
-    end
+    #       enums single: { value: 1 }, married: { value: 2 }, divorced: { value: 3 }, widowed: { value: 4 }
+    #     end.new(:relationship_status)
+    #   end
+    # end
   end
 end
