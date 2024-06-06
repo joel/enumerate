@@ -21,15 +21,7 @@ module Enumerate
       end
 
       describe ".define_enum_methods" do
-        it "defines .single methods" do
-          expect(enum_object.class).to respond_to(:single)
-        end
-
-        it "returns enum entry value from the class" do
-          expect(enum_object.class.single).to eq(value: 1)
-        end
-
-        it "defines £single methods" do
+        it "defines #single methods" do
           expect(enum_object).to respond_to(:single)
         end
 

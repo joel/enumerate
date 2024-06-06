@@ -39,7 +39,7 @@ module Enumerate
         end
 
         define_method(name) do
-          self.class.send(name)
+          entries[name]
         end
       end
     end
