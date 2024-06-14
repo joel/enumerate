@@ -1,13 +1,24 @@
 # frozen_string_literal: true
 
-require "active_support/all"
-
 module Enumerate
   module Plugins
     module Translatable
-      extend ActiveSupport::Concern
+      module InstanceMethods
+        def translation(name)
+          I18n.t(translation_key(name))
+        end
 
-      included do
+        # en:
+        #   enumerations:
+        #     relationship_status:
+        #       single: Person single
+        def translation_key(name)
+          [
+            "enumerations",
+            attribute_name.to_s.underscore,
+            name
+          ].compact.join(".")
+        end
       end
     end
   end

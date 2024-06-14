@@ -11,6 +11,13 @@ module Enumerate
       subclass.include(InstanceMethods)
       subclass.extend(ClassMethods)
 
+      Dir["#{File.dirname(__FILE__)}/plugins/*.rb"].each { |file| require file }
+
+      [Plugins::Translatable].each do |plugin|
+        subclass.include(plugin::InstanceMethods) if plugin.const_defined?(:InstanceMethods)
+        subclass.extend(plugin::ClassMethods) if plugin.const_defined?(:ClassMethods)
+      end
+
       super
     end
 
@@ -46,21 +53,6 @@ module Enumerate
     end
 
     module InstanceMethods
-      def translation(name)
-        I18n.t(translation_key(name))
-      end
-
-      # en:
-      #   enumerations:
-      #     relationship_status:
-      #       single: Person single
-      def translation_key(name)
-        [
-          "enumerations",
-          attribute_name.to_s.underscore,
-          name
-        ].compact.join(".")
-      end
     end
   end
 end
