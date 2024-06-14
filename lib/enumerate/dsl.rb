@@ -13,7 +13,10 @@ module Enumerate
 
       Dir["#{File.dirname(__FILE__)}/plugins/*.rb"].each { |file| require file }
 
-      [Plugins::Translatable].each do |plugin|
+      [
+        Plugins::Translatable,
+        Plugins::HelperMethods
+      ].each do |plugin|
         subclass.include(plugin::InstanceMethods) if plugin.const_defined?(:InstanceMethods)
         subclass.extend(plugin::ClassMethods) if plugin.const_defined?(:ClassMethods)
       end
@@ -39,16 +42,6 @@ module Enumerate
         self.entries = entries.merge(name => value_maybe_hash)
 
         define_helpers_methods(name)
-      end
-
-      def define_helpers_methods(name)
-        define_singleton_method(name) do
-          entries[name]
-        end
-
-        define_method(name) do
-          entries[name]
-        end
       end
     end
 
