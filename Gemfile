@@ -19,4 +19,6 @@ end
 
 group :test do
   gem "rspec"
+  gem "sqlite3", "~> 1.7"
+  gem "with_model"
 end
