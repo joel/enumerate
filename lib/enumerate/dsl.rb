@@ -40,8 +40,6 @@ module Enumerate
       # e.g. enum :single, { value: 1 }
       def enum(name, value_maybe_hash)
         self.entries = entries.merge(name => value_maybe_hash)
-
-        define_helpers_methods(name) if defined?(Plugins::HelperMethods::ClassMethods)
       end
     end
 
