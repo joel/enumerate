@@ -3,8 +3,7 @@
 module Enumerate
   RSpec.describe DeprecatedDsl do
     let(:klass) do
-      Class.new do
-        include Enumerate::Dsl
+      Class.new(Enumerate::Dsl) do
         include Enumerate::DeprecatedDsl
       end
     end

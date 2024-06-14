@@ -1,16 +1,17 @@
 # frozen_string_literal: true
 
-require "active_support/all"
-
 module Enumerate
-  module Dsl
-    extend ActiveSupport::Concern
+  class Dsl
+    def self.inherited(subclass)
+      subclass.class_attribute :entries
+      subclass.entries = {}
 
-    included do
-      class_attribute :entries
-      self.entries = {}
+      subclass.attr_reader :attribute_name, :options
 
-      attr_reader :attribute_name, :options
+      subclass.include(InstanceMethods)
+      subclass.extend(ClassMethods)
+
+      super
     end
 
     def initialize(attribute_name, options = {})
@@ -18,7 +19,7 @@ module Enumerate
       @options = options
     end
 
-    class_methods do
+    module ClassMethods
       # e.g. enums single: { value: 1 }, married: { value: 2 }, divorced: { value: 3 }, widowed: { value: 4 }
       def enums(entries)
         entries.each do |key, value|
@@ -44,20 +45,22 @@ module Enumerate
       end
     end
 
-    def translation(name)
-      I18n.t(translation_key(name))
-    end
+    module InstanceMethods
+      def translation(name)
+        I18n.t(translation_key(name))
+      end
 
-    # en:
-    #   enumerations:
-    #     relationship_status:
-    #       single: Person single
-    def translation_key(name)
-      [
-        "enumerations",
-        attribute_name.to_s.underscore,
-        name
-      ].compact.join(".")
+      # en:
+      #   enumerations:
+      #     relationship_status:
+      #       single: Person single
+      def translation_key(name)
+        [
+          "enumerations",
+          attribute_name.to_s.underscore,
+          name
+        ].compact.join(".")
+      end
     end
   end
 end
