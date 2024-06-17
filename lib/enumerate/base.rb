@@ -4,31 +4,24 @@ require "active_support/all"
 
 module Enumerate
   module Base
-    extend ActiveSupport::Concern
+    def self.extended(receiver)
+      receiver.class_attribute :enumerations, instance_writer: false, instance_reader: false
+      receiver.enumerations = {}
 
-    included do
-      class_attribute :enumerations,   instance_writer: false, instance_reader: false
-      class_attribute :attribute_name, instance_writer: false, instance_reader: false
-      class_attribute :options,        instance_writer: false, instance_reader: false
+      receiver.extend(ClassMethods)
+
+      super
     end
 
-    class_methods do
+    module ClassMethods
       def has_enumeration_for(attribute_name, options = {})
-        self.attribute_name = attribute_name
-        self.options        = options
-        self.enumerations   = ({})
+        Dir["#{File.dirname(__FILE__)}/behaviours/*.rb"].each { |file| require file }
 
-        store_enumeration_class
-      end
-
-      private
-
-      def store_enumeration_class
-        enumerations[attribute_name] = enumeration_class_name.constantize.new(attribute_name, options)
-      end
-
-      def enumeration_class_name
-        attribute_name.to_s.classify
+        [
+          Behaviours::EnumerationClassHelper
+        ].each do |extra_behaviour|
+          extra_behaviour.call(self, attribute_name, options)
+        end
       end
     end
   end

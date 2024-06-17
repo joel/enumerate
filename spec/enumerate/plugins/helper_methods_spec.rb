@@ -14,6 +14,11 @@ module Enumerate
           klass.send(:define_helpers_methods, :single)
           expect(klass.respond_to?(:single)).to be true
         end
+
+        it "defines a instance method" do
+          klass.send(:define_helpers_methods, :single)
+          expect(klass.new.respond_to?(:single)).to be true
+        end
       end
     end
   end

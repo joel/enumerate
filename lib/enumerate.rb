@@ -2,6 +2,8 @@
 
 require "zeitwerk"
 loader = Zeitwerk::Loader.for_gem
+loader.ignore("#{__dir__}/plugins")
+loader.ignore("#{__dir__}/behaviours")
 loader.setup
 
 module Enumerate
