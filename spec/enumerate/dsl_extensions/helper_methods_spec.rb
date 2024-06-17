@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "enumerate/dsl_extensions/helper_methods"
+
 module Enumerate
   module DslExtensions
     RSpec.describe HelperMethods do

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "enumerate/behaviours/enumeration_class_helper"
+
 class Single; end # rubocop:disable Lint/EmptyClass
 
 module Enumerate

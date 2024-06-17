@@ -3,7 +3,6 @@ PATH
   specs:
     enumerate (0.1.0)
       activesupport
-      zeitwerk
 
 GEM
   remote: https://rubygems.org/
@@ -107,7 +106,6 @@ GEM
     unicode-display_width (2.5.0)
     with_model (2.1.7)
       activerecord (>= 6.0)
-    zeitwerk (2.6.15)
 
 PLATFORMS
   arm64-darwin-23
