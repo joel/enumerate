@@ -16,7 +16,7 @@ Gemspec/RequiredRubyVersion:
 # Offense count: 2
 GitlabSecurity/PublicSend:
   Exclude:
-    - 'spec/enumerate/plugins/helper_methods_spec.rb'
+    - 'spec/enumerate/dsl_extensions/helper_methods_spec.rb'
 
 # Offense count: 3
 # Configuration parameters: AllowedMethods.
@@ -95,8 +95,8 @@ Style/Documentation:
     - 'lib/enumerate/behaviours/store_enumeration_class.rb'
     - 'lib/enumerate/deprecated_dsl.rb'
     - 'lib/enumerate/dsl.rb'
-    - 'lib/enumerate/plugins/helper_methods.rb'
-    - 'lib/enumerate/plugins/translatable.rb'
+    - 'lib/enumerate/dsl_extensions/helper_methods.rb'
+    - 'lib/enumerate/dsl_extensions/translatable.rb'
 
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).

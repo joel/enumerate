@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module Enumerate
-  module Plugins
+  module DslExtensions
     RSpec.describe HelperMethods do
       let(:klass) do
         Class.new do
-          extend Enumerate::Plugins::HelperMethods::ClassMethods
+          extend Enumerate::DslExtensions::HelperMethods::ClassMethods
         end
       end
 

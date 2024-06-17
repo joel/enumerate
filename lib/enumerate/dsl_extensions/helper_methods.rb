@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Enumerate
-  module Plugins
+  module DslExtensions
     module HelperMethods
       module ClassMethods
         def enum(name, value_maybe_hash)

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Enumerate
-  module Plugins
+  module DslExtensions
     module Translatable
       module InstanceMethods
         def translation(name)

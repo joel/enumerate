@@ -11,11 +11,11 @@ module Enumerate
       subclass.include(InstanceMethods)
       subclass.extend(ClassMethods)
 
-      Dir["#{File.dirname(__FILE__)}/plugins/*.rb"].each { |file| require file }
+      Dir["#{File.dirname(__FILE__)}/dsl_extensions/*.rb"].each { |file| require file }
 
       [
-        Plugins::Translatable,
-        Plugins::HelperMethods
+        DslExtensions::Translatable,
+        DslExtensions::HelperMethods
       ].each do |plugin|
         subclass.include(plugin::InstanceMethods) if plugin.const_defined?(:InstanceMethods)
         subclass.extend(plugin::ClassMethods) if plugin.const_defined?(:ClassMethods)
