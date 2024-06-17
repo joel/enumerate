@@ -7,7 +7,7 @@ module Enumerate
         def call(_receiver, attribute_name, options)
           return if options[:with]
 
-          options[:with] = attribute_name.to_s.camelize.constantize
+          options[:with] = attribute_name.to_s.classify.constantize
         end
       end
     end
