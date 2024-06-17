@@ -30,6 +30,6 @@ RSpec.describe "Enumerate" do
   end
 
   it "stores the enumeration object as an instance of the enumeration class" do
-    expect(klass_with_enumeration.enumerations[:relationship_status]).to be_a(RelationshipStatus)
+    expect(klass_with_enumeration.enumerations[:relationship_status]).to eq(RelationshipStatus)
   end
 end

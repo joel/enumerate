@@ -4,14 +4,10 @@ module Enumerate
   module Behaviours
     class EnumerationClassHelper
       class << self
-        def call(receiver, attribute_name, options)
-          receiver.enumerations[attribute_name] = enumeration_class_name(attribute_name).constantize.new(attribute_name, options)
-        end
+        def call(_receiver, attribute_name, options)
+          return if options[:with]
 
-        private
-
-        def enumeration_class_name(attribute_name)
-          attribute_name.to_s.classify
+          options[:with] = attribute_name.to_s.camelize.constantize
         end
       end
     end

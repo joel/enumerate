@@ -18,7 +18,8 @@ module Enumerate
         Dir["#{File.dirname(__FILE__)}/behaviours/*.rb"].each { |file| require file }
 
         [
-          Behaviours::EnumerationClassHelper
+          Behaviours::EnumerationClassHelper,
+          Behaviours::StoreEnumerationClass
         ].each do |extra_behaviour|
           extra_behaviour.call(self, attribute_name, options)
         end
