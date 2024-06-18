@@ -113,6 +113,7 @@ PLATFORMS
 
 DEPENDENCIES
   enumerate!
+  i18n
   rake
   rspec
   rubocop
@@ -126,4 +127,4 @@ DEPENDENCIES
   with_model
 
 BUNDLED WITH
-   2.5.9
+   2.5.13

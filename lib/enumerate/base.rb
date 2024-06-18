@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "active_support/all"
-
 module Enumerate
   module Base
     def self.extended(receiver)

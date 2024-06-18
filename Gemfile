@@ -5,6 +5,7 @@ source "https://rubygems.org"
 # Specify your gem's dependencies in enumerate.gemspec
 gemspec
 
+gem "i18n"
 gem "rake"
 
 group :development, :test do

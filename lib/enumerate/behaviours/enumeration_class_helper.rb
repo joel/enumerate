@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "active_support/inflector"
+
 module Enumerate
   module Behaviours
     class EnumerationClassHelper
