@@ -10,7 +10,7 @@ RSpec.describe "Enumerate" do
       enumeration_values single: { value: 1 }, married: { value: 2 }, divorced: { value: 3 }, widowed: { value: 4 }
     end
 
-    RelationshipStatus
+    RelationshipStatus.new(nil, nil)
   end
 
   let(:klass_with_enumeration) do
