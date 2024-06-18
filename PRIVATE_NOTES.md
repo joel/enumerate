@@ -1,6 +1,7 @@
 # TODO
 
-- [] Add Persitence
+- [x] Add Persitence
 - [] Column definition
 - [] Archive ability
+- [] Railtie
 
