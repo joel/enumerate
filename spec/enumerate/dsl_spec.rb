@@ -48,5 +48,25 @@ module Enumerate
         RelationshipStatus.new(:relationship_status)
       end
     end
+
+    it_behaves_like "an enum" do
+      let(:enum_object) do
+        class RelationshipStatus < Enumerate::Dsl
+          enumeration_values single: 1, married: 2, divorced: 3, widowed: 4
+        end
+
+        RelationshipStatus.new(:relationship_status)
+      end
+    end
+
+    it_behaves_like "an enum", :focus do
+      let(:enum_object) do
+        class RelationshipStatus < Enumerate::Dsl
+          enumeration_values :single, :married, :divorced, :widowed
+        end
+
+        RelationshipStatus.new(:relationship_status)
+      end
+    end
   end
 end
