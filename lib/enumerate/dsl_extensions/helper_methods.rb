@@ -14,11 +14,11 @@ module Enumerate
 
         def define_helpers_methods(name)
           singleton_class.define_method(name) do
-            entries[name]
+            entries[name][:value]
           end
 
           define_method(name) do
-            entries[name]
+            entries[name][:value]
           end
         end
       end

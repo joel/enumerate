@@ -26,7 +26,7 @@ module Enumerate
         end
 
         it "returns enum entry value from the instance" do
-          expect(enum_object.single).to eq(value: 1)
+          expect(enum_object.single).to eq(1)
         end
 
         it "defines #translation methods" do

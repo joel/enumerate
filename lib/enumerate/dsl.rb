@@ -16,7 +16,8 @@ module Enumerate
       [
         DslExtensions::Translatable,
         DslExtensions::HelperMethods,
-        DslExtensions::Deprecation
+        DslExtensions::Deprecation,
+        DslExtensions::AccessorMethods
       ].each do |plugin|
         subclass.include(plugin::InstanceMethods) if plugin.const_defined?(:InstanceMethods)
         subclass.extend(plugin::ClassMethods) if plugin.const_defined?(:ClassMethods)
