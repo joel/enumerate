@@ -13,10 +13,6 @@ module Enumerate
         private
 
         def define_helpers_methods(name)
-          singleton_class.define_method(name) do
-            entries[name][:value]
-          end
-
           define_method(name) do
             entries[name][:value]
           end
