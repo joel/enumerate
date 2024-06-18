@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "enumerate/version"
-require "enumerate/base"
+require "enumerate/behaviour"
 require "enumerate/dsl"
 
 module Enumerate

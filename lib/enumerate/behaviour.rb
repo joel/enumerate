@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Enumerate
-  module Base
+  module Behaviour
     def self.extended(receiver)
       receiver.class_attribute :enumerations, instance_writer: false, instance_reader: false
       receiver.enumerations = {}

@@ -18,7 +18,7 @@ RSpec.describe "Persistence", :sqlite do
       end
 
       model do
-        extend Enumerate::Base
+        extend Enumerate::Behaviour
 
         has_enumeration_for :relationship_status
       end

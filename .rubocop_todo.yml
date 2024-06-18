@@ -48,7 +48,7 @@ Metrics/MethodLength:
 Naming/PredicateName:
   Exclude:
     - 'spec/**/*'
-    - 'lib/enumerate/base.rb'
+    - 'lib/enumerate/behaviour.rb'
 
 # Offense count: 1
 # Configuration parameters: CountAsOne.
@@ -85,7 +85,7 @@ Style/Documentation:
   Exclude:
     - 'spec/**/*'
     - 'test/**/*'
-    - 'lib/enumerate/base.rb'
+    - 'lib/enumerate/behaviour.rb'
     - 'lib/enumerate/behaviours/enumeration_class_helper.rb'
     - 'lib/enumerate/behaviours/store_enumeration_class.rb'
     - 'lib/enumerate/dsl.rb'

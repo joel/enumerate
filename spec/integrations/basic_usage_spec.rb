@@ -11,7 +11,7 @@ RSpec.describe "Enumerate" do
 
   let(:klass_with_enumeration) do
     Class.new do
-      extend Enumerate::Base
+      extend Enumerate::Behaviour
 
       has_enumeration_for :relationship_status
 

@@ -9,7 +9,7 @@ module Enumerate
     RSpec.describe StoreEnumerationClass do
       let(:receiver) do
         Class.new do
-          extend Enumerate::Base
+          extend Enumerate::Behaviour
         end
       end
       let(:attribute_name) { :single }
