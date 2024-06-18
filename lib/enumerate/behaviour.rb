@@ -13,13 +13,15 @@ module Enumerate
 
     module ClassMethods
       def has_enumeration_for(attribute_name, options = {})
-        Dir["#{File.dirname(__FILE__)}/behaviours/*.rb"].each { |file| require file }
+        %i[
+          enumeration_class_helper
+          store_enumeration_class
+          virtual_accessors
+        ].each do |extra_behaviour_name|
+          require "enumerate/behaviours/#{extra_behaviour_name.to_s.underscore}"
 
-        [
-          Behaviours::EnumerationClassHelper,
-          Behaviours::StoreEnumerationClass,
-          Behaviours::VirtualAccessors
-        ].each do |extra_behaviour|
+          extra_behaviour = "Enumerate::Behaviours::#{extra_behaviour_name.to_s.camelize}".constantize
+
           extra_behaviour.call(self, attribute_name, options)
         end
       end
