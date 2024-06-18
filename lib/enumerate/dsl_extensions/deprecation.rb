@@ -4,10 +4,10 @@ module Enumerate
   module DslExtensions
     module Deprecation
       module ClassMethods
-        def enumeration_value(key, value, metadata: {})
-          ActiveSupport::Deprecation.warn("`enumeration_value` is deprecated and will be removed in a future release. Please use `enum` instead.")
+        def associate_values(*)
+          ActiveSupport::Deprecation.warn("`associate_values` is deprecated and will be removed in a future release. Please use `enumeration_values` instead.")
 
-          enum(key, value)
+          enumeration_values(*)
         end
       end
     end

@@ -42,7 +42,7 @@ module Enumerate
     it_behaves_like "an enum" do
       let(:enum_object) do
         class RelationshipStatus < Enumerate::Dsl
-          enums single: { value: 1 }, married: { value: 2 }, divorced: { value: 3 }, widowed: { value: 4 }
+          enumeration_values single: { value: 1 }, married: { value: 2 }, divorced: { value: 3 }, widowed: { value: 4 }
         end
 
         RelationshipStatus.new(:relationship_status)

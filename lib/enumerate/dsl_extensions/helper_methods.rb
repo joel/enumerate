@@ -4,7 +4,7 @@ module Enumerate
   module DslExtensions
     module HelperMethods
       module ClassMethods
-        def enum(name, value_maybe_hash)
+        def enumeration_value(name, value_maybe_hash)
           super
 
           define_helpers_methods(name)

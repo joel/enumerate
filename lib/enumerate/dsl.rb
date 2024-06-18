@@ -31,15 +31,15 @@ module Enumerate
     end
 
     module ClassMethods
-      # e.g. enums single: { value: 1 }, married: { value: 2 }, divorced: { value: 3 }, widowed: { value: 4 }
-      def enums(entries)
+      # e.g. enumeration_values single: { value: 1 }, married: { value: 2 }, divorced: { value: 3 }, widowed: { value: 4 }
+      def enumeration_values(entries)
         entries.each do |key, value|
-          enum(key, value)
+          enumeration_value(key, value)
         end
       end
 
-      # e.g. enum :single, { value: 1 }
-      def enum(name, value_maybe_hash)
+      # e.g. enumeration_value :single, { value: 1 }
+      def enumeration_value(name, value_maybe_hash)
         self.entries = entries.merge(name => value_maybe_hash)
       end
     end

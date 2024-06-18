@@ -13,15 +13,15 @@ module Enumerate
 
       subject(:enumeratable) { klass }
 
-      describe ".enumeration_value" do
+      describe ".associate_values" do
         before do
-          expect(enumeratable).to receive(:enum).with(:status, { active: 1, inactive: 0 })
+          allow(enumeratable).to receive(:enumeration_values)
         end
 
         it "emits a deprecation warning" do
           expect do
-            enumeratable.enumeration_value(:status, { active: 1, inactive: 0 })
-          end.to have_deprecated_warning("`enumeration_value` is deprecated and will be removed in a future release. Please use `enum` instead.")
+            enumeratable.associate_values(:status, { active: 1, inactive: 0 })
+          end.to have_deprecated_warning("`associate_values` is deprecated and will be removed in a future release. Please use `enumeration_values` instead.")
         end
       end
     end

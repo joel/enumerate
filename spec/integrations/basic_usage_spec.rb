@@ -5,7 +5,7 @@ require "spec_helper"
 RSpec.describe "Enumerate" do
   let!(:enumeration_class) do
     class RelationshipStatus < Enumerate::Dsl
-      enums single: { value: 1 }, married: { value: 2 }, divorced: { value: 3 }, widowed: { value: 4 }
+      enumeration_values single: { value: 1 }, married: { value: 2 }, divorced: { value: 3 }, widowed: { value: 4 }
     end
   end
 

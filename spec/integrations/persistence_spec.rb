@@ -7,7 +7,7 @@ RSpec.describe "Persistence", :sqlite do
 
   let!(:enumeration_klass) do
     class RelationshipStatus < Enumerate::Dsl
-      enums single: { value: 1 }, married: { value: 2 }, divorced: { value: 3 }, widowed: { value: 4 }
+      enumeration_values single: { value: 1 }, married: { value: 2 }, divorced: { value: 3 }, widowed: { value: 4 }
     end
   end
 
