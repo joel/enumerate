@@ -17,7 +17,8 @@ module Enumerate
 
         [
           Behaviours::EnumerationClassHelper,
-          Behaviours::StoreEnumerationClass
+          Behaviours::StoreEnumerationClass,
+          Behaviours::VirtualAccessors
         ].each do |extra_behaviour|
           extra_behaviour.call(self, attribute_name, options)
         end
