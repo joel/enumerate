@@ -16,6 +16,10 @@ module Enumerate
           define_method(name) do
             entries[name][:value]
           end
+
+          define_method(:"#{name}_raw") do
+            entries[name]
+          end
         end
       end
     end

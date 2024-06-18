@@ -5,7 +5,7 @@ require "spec_helper"
 RSpec.describe "Enumerate" do
   subject(:instance) { klass_with_enumeration.new }
 
-  let!(:enumeration_class) do
+  let!(:enumeration_instance) do
     class RelationshipStatus < Enumerate::Dsl
       enumeration_values single: { value: 1 }, married: { value: 2 }, divorced: { value: 3 }, widowed: { value: 4 }
     end
@@ -38,12 +38,16 @@ RSpec.describe "Enumerate" do
   end
 
   context "with accessors" do
-    it "defines a class method" do
-      expect(enumeration_class.single).to eq(1)
+    it "defines a getter method for the value" do
+      expect(enumeration_instance.single).to eq(1)
     end
 
-    it "defines a instance method" do
-      expect(enumeration_class).to respond_to(:single=)
+    it "defines a getter method for the raw value" do
+      expect(enumeration_instance.single_raw).to eq({ value: 1 })
+    end
+
+    it "defines a setter method for the value" do
+      expect(enumeration_instance).to respond_to(:single=)
     end
   end
 end
